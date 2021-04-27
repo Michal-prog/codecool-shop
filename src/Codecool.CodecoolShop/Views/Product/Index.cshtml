@@ -2,9 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+@using System.Collections
 @model List<Codecool.CodecoolShop.Models.Product>
 
 <div class="container">
+    <select name="category">
+        @foreach (var category in (List<ProductCategory>) ViewData["ListCategory"])
+        {
+            <option value="@category.Department"> @category.Department </option>
+        }
+    </select >
+        
     @foreach (var element in Model)
     {
         <div class="col-lg-3 col-lg-3" style="display: inline-block; max-width: 350px; height: 350px">

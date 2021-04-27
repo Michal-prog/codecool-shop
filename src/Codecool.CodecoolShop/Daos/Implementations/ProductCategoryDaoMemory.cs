@@ -42,5 +42,10 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         {
             return data;
         }
+        //public List<ProductCategory> GetAllList()
+        //{
+        //    return data;
+        //}
+
     }
 }
