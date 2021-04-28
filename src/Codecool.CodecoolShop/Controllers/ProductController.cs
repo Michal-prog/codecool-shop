@@ -22,7 +22,8 @@ namespace Codecool.CodecoolShop.Controllers
             _logger = logger;
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
-                ProductCategoryDaoMemory.GetInstance());
+                ProductCategoryDaoMemory.GetInstance(),
+                SupplierDaoMemory.GetInstance());
         }
 
         
@@ -46,8 +47,7 @@ namespace Codecool.CodecoolShop.Controllers
         [HttpGet]
         public IActionResult Index(string category = "1")
         {
-            var CategoryNr = int.Parse(category); 
-            var products = ProductService.GetProductsForCategory(CategoryNr);
+            var CategoryNr = int.Parse(category);
             //product category
             var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
             ViewData["ListCategory"] = list;
@@ -55,6 +55,7 @@ namespace Codecool.CodecoolShop.Controllers
             // product suppliers
             var listOfSuppliers = ProductService.GetListOfSuplliers();
             ViewData["listOfSuppliers"] = listOfSuppliers;
+            var products = ProductService.GetProductsForCategory(CategoryNr);
             return View(products.ToList());
         }
 

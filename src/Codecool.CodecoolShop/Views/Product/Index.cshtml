@@ -19,7 +19,7 @@
         </select>
         <button type="submit">Check</button>
     </form>
-    <form asp-controller="Product" asp-action="ChoosenCategory" method="get">
+    <form asp-controller="Product" asp-action="Index" method="get">
         <select id="supplier" name="supplier">
             @foreach (var supplierName in (List<string>)ViewData["listOfSuppliers"])
             {
