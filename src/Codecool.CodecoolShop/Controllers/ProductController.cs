@@ -44,15 +44,10 @@ namespace Codecool.CodecoolShop.Controllers
             return View(products.ToList());
         }
         [HttpGet]
-        public IActionResult ChoosenCategory(string category)
+        public IActionResult Index(string category = "1")
         {
-            int x;
-            if (category == "phone")
-            {
-                x = 2;
-            }
-
-            var products = ProductService.GetProductsForCategory(x);
+            var CategoryNr = int.Parse(category); 
+            var products = ProductService.GetProductsForCategory(CategoryNr);
             //product category
             var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
             ViewData["ListCategory"] = list;

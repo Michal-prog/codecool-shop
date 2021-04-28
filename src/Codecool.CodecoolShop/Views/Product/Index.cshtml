@@ -10,11 +10,11 @@
 
 <div class="container">
 
-    <form asp-controller="Product" asp-action="ChoosenCategory" method="get">
+    <form asp-controller="Product" asp-action="Index" method="get">
         <select id="category" name="category">
             @foreach (var category in (List<ProductCategory>)ViewData["ListCategory"])
             {
-                <option id="option" value="@category.Department"> @category.Department </option>
+                <option id="option" value="@category.Id"> @category.Department </option>
             }
         </select>
         <button type="submit">Check</button>
