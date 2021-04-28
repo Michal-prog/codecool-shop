@@ -43,6 +43,25 @@ namespace Codecool.CodecoolShop.Controllers
             
             return View(products.ToList());
         }
+        [HttpGet]
+        public IActionResult ChoosenCategory(string category)
+        {
+            int x;
+            if (category == "phone")
+            {
+                x = 2;
+            }
+
+            var products = ProductService.GetProductsForCategory(x);
+            //product category
+            var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
+            ViewData["ListCategory"] = list;
+            //var value = HttpContext.Request.
+            // product suppliers
+            var listOfSuppliers = ProductService.GetListOfSuplliers();
+            ViewData["listOfSuppliers"] = listOfSuppliers;
+            return View(products.ToList());
+        }
 
         public IActionResult Privacy()
         {

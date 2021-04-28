@@ -5,25 +5,28 @@
 @using System.Collections
 @using Codecool.CodecoolShop.Controllers
 @using Codecool.CodecoolShop.Services
+
 @model List<Codecool.CodecoolShop.Models.Product>
 
 <div class="container">
 
-    <form>
+    <form asp-controller="Product" asp-action="ChoosenCategory" method="get">
         <select id="category" name="category">
-            @foreach (var category in (List<ProductCategory>) ViewData["ListCategory"])
+            @foreach (var category in (List<ProductCategory>)ViewData["ListCategory"])
             {
                 <option id="option" value="@category.Department"> @category.Department </option>
             }
-        </select >
+        </select>
+        <button type="submit">Check</button>
     </form>
-    <form>
+    <form asp-controller="Product" asp-action="ChoosenCategory" method="get">
         <select id="supplier" name="supplier">
-            @foreach (var supplierName in (List<string>) ViewData["listOfSuppliers"])
+            @foreach (var supplierName in (List<string>)ViewData["listOfSuppliers"])
             {
                 <option id="SupplierOption" value="@supplierName"> @supplierName </option>
             }
-        </select >
+        </select>
+        <button type="submit">Check</button>
     </form>
 
 
