@@ -28,8 +28,9 @@ namespace Codecool.CodecoolShop.Controllers
         
         
         
-        public IActionResult Index(int categoryNumber = 1)
+        public IActionResult Index([FromRoute]int categoryNumber = 1)
         {
+            /*int value = Request.QueryString[];*/
             var products = ProductService.GetProductsForCategory(categoryNumber);
             
             //product category

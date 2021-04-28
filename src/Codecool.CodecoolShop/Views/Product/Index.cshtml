@@ -8,23 +8,16 @@
 @model List<Codecool.CodecoolShop.Models.Product>
 
 <div class="container">
-
-    <form>
-        <select id="category" name="category">
-            @foreach (var category in (List<ProductCategory>) ViewData["ListCategory"])
+    @foreach (var category in (List<ProductCategory>) ViewData["ListCategory"])
             {
-                <option id="option" value="@category.Department"> @category.Department </option>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index" asp-route-categoryId="@category.Id">@category.Department</a>
             }
-        </select >
-    </form>
-    <form>
-        <select id="supplier" name="supplier">
-            @foreach (var supplierName in (List<string>) ViewData["listOfSuppliers"])
+
+    @foreach (var supplierName in (List<string>) ViewData["listOfSuppliers"])
             {
                 <option id="SupplierOption" value="@supplierName"> @supplierName </option>
             }
-        </select >
-    </form>
+       
 
 
     @foreach (var element in Model)
