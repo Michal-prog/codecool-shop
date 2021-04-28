@@ -10,5 +10,7 @@ namespace Codecool.CodecoolShop.Models
         {
             return new string($"Id: {Id} Name: {Name} Description: {Description}");
         }
+        
+    
     }
 }

@@ -25,11 +25,21 @@ namespace Codecool.CodecoolShop.Controllers
                 ProductCategoryDaoMemory.GetInstance());
         }
 
-        public IActionResult Index()
+        
+        
+        
+        public IActionResult Index(int categoryNumber = 1)
         {
-            var products = ProductService.GetProductsForCategory(1);
+            var products = ProductService.GetProductsForCategory(categoryNumber);
+            
+            //product category
             var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
             ViewData["ListCategory"] = list;
+            
+            // product suppliers
+            var listOfSuppliers = ProductService.GetListOfSuplliers();
+            ViewData["listOfSuppliers"] = listOfSuppliers;
+            
             
             return View(products.ToList());
         }
