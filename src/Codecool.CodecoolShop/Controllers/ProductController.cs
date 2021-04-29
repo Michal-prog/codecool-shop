@@ -38,25 +38,49 @@ namespace Codecool.CodecoolShop.Controllers
             ViewData["ListCategory"] = list;
             
             // product suppliers
-            var listOfSuppliers = ProductService.GetListOfSuplliers();
+            var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewData["listOfSuppliers"] = listOfSuppliers;
             
             
             return View(products.ToList());
         }
+        //[HttpGet]
+        //public IActionResult Index(string category = "1")
+        //{
+        //    var CategoryNr = int.Parse(category);
+        //    //product category
+        //    var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
+        //    ViewData["ListCategory"] = list;
+        //    // product suppliers
+        //    var listOfSuppliers = ProductService.GetListOfSuplliers();
+        //    ViewData["listOfSuppliers"] = listOfSuppliers;
+        //    //var products = ProductService.GetProductsForCategory(CategoryNr);
+        //    return View(products.ToList());
+        //}
+
         [HttpGet]
-        public IActionResult Index(string category = "1")
+        public IActionResult Index(string supplier, string category = "1")
         {
+            
             var CategoryNr = int.Parse(category);
             //product category
             var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
             ViewData["ListCategory"] = list;
-            //var value = HttpContext.Request.
             // product suppliers
-            var listOfSuppliers = ProductService.GetListOfSuplliers();
+            var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewData["listOfSuppliers"] = listOfSuppliers;
-            var products = ProductService.GetProductsForCategory(CategoryNr);
-            return View(products.ToList());
+            if (supplier != null)
+            {
+                var SupplierNr = int.Parse(supplier);
+                var products = ProductService.GetProductsForSupplier(SupplierNr);
+                return View(products.ToList());
+            }
+            else
+            {
+                var products = ProductService.GetProductsForCategory(CategoryNr);
+                return View(products.ToList());
+            }
+            
         }
 
         public IActionResult Privacy()

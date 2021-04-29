@@ -38,7 +38,7 @@ namespace Codecool.CodecoolShop.Services
             Supplier supplier = this.supplierDao.Get(supplierId);
             return this.productDao.GetBy(supplier);
         }
-        public List<string> GetListOfSuplliers()
+        public List<Supplier> GetListOfSuplliers()
         {
             List<Supplier> listOfSuppliers = new List<Supplier>();
             var listOfProduct = Daos.Implementations.ProductDaoMemory.GetInstance().GetAll();
@@ -46,16 +46,15 @@ namespace Codecool.CodecoolShop.Services
             { 
                 listOfSuppliers.Add(product.Supplier);
             }
-            List<string> listOfSuppliersString = new List<string>();
-            foreach (var supplier in listOfSuppliers)
-            {
-                if (!listOfSuppliersString.Contains(supplier.Name))
-                {
-                    listOfSuppliersString.Add(supplier.Name);
-                }
-            }
-            
-            return listOfSuppliersString;
+            //List<string> listOfSuppliersString = new List<string>();
+            //foreach (var supplier in listOfSuppliers)
+            //{
+            //    if (!listOfSuppliersString.Contains(supplier.Name))
+            //    {
+            //        listOfSuppliersString.Add(supplier.Name);
+            //    }
+            //}
+            return listOfSuppliers;
         }
     }
 }
