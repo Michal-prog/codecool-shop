@@ -103,6 +103,7 @@ namespace Codecool.CodecoolShop.Controllers
             var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             ViewBag.total = cart.Sum(item => item.product.DefaultPrice * item.Quantity);
+            ViewBag.Quantity = cart.Sum(item => item.Quantity);
             return View("cart");
         }
 
