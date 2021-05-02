@@ -38,6 +38,11 @@ namespace Codecool.CodecoolShop.Services
             Supplier supplier = this.supplierDao.Get(supplierId);
             return this.productDao.GetBy(supplier);
         }
+
+        public Product GetProduct(int id)
+        {
+           return this.productDao.Get(id);
+        }
         public List<Supplier> GetListOfSuplliers()
         {
             List<Supplier> listOfSuppliers = new List<Supplier>();
@@ -56,5 +61,7 @@ namespace Codecool.CodecoolShop.Services
             //}
             return listOfSuppliers;
         }
+
     }
+
 }

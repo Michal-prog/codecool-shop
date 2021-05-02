@@ -2,12 +2,9 @@
 
 namespace Codecool.CodecoolShop.Models
 {
-    public struct LineItem
+    public class LineItem
     {
-        public decimal price { get; set; }
-
         public int Quantity { get; set; }
-
-        public Product product;
+        public Product product { get; set; }
     }
 }

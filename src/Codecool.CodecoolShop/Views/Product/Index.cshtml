@@ -49,7 +49,7 @@
                     <p class="card-text text-center">
                         <strong>Price: @element.DefaultPrice.ToString("C2")</strong>
                     </p>
-                    <a href="" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                    <a type="button" class="btn btn-primary" style="float: bottom" asp-controller="product" asp-action="buy" asp-route-id="@element.Id">Add To Cart</a>
                 </div>
             </div>
         </div>

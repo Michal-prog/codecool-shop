@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Codecool.CodecoolShop.Helpers;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -44,20 +45,7 @@ namespace Codecool.CodecoolShop.Controllers
             
             return View(products.ToList());
         }
-        //[HttpGet]
-        //public IActionResult Index(string category = "1")
-        //{
-        //    var CategoryNr = int.Parse(category);
-        //    //product category
-        //    var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
-        //    ViewData["ListCategory"] = list;
-        //    // product suppliers
-        //    var listOfSuppliers = ProductService.GetListOfSuplliers();
-        //    ViewData["listOfSuppliers"] = listOfSuppliers;
-        //    //var products = ProductService.GetProductsForCategory(CategoryNr);
-        //    return View(products.ToList());
-        //}
-
+  
         [HttpGet]
         public IActionResult Index(string supplier, string category = "1")
         {
@@ -82,7 +70,54 @@ namespace Codecool.CodecoolShop.Controllers
             }
             
         }
+        
+        public IActionResult Buy(int id)
+        {
+            //var id = int.Parse(stringid);
+            if (SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart") == null)
+            {
+                List<LineItem> cart = new List<LineItem>();
+                cart.Add(new LineItem { product = ProductService.GetProduct(id), Quantity = 1 });
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+                int index = isExist(id);
+                if (index != -1)
+                {
+                    cart[index].Quantity++;
+                }
+                else
+                {
+                    cart.Add(new LineItem { product = ProductService.GetProduct(id), Quantity = 1 });
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            return RedirectToAction("Cart");
+        }
 
+        [Route("cart")]
+        public IActionResult Cart()
+        {
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            ViewBag.cart = cart;
+            ViewBag.total = cart.Sum(item => item.product.DefaultPrice * item.Quantity);
+            return View("cart");
+        }
+
+        private int isExist(int id)
+        {
+            List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (cart[i].product.Id.Equals(id))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
         public IActionResult Privacy()
         {
             return View();
