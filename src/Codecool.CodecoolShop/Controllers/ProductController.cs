@@ -41,8 +41,20 @@ namespace Codecool.CodecoolShop.Controllers
             // product suppliers
             var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewData["listOfSuppliers"] = listOfSuppliers;
-            
-            
+            if (SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart") != null)
+            {
+                var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+                ViewBag.cart = cart;
+                ViewBag.total = cart.Sum(item => item.product.DefaultPrice * item.Quantity);
+                ViewBag.Quantity = cart.Sum(item => item.Quantity);
+            }
+            else
+            {
+                ViewBag.cart = null;
+                ViewBag.total = 0;
+                ViewBag.Quantity = 0;
+            }
+
             return View(products.ToList());
         }
   
@@ -57,6 +69,19 @@ namespace Codecool.CodecoolShop.Controllers
             // product suppliers
             var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewData["listOfSuppliers"] = listOfSuppliers;
+            if (SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart") != null)
+            {
+                var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+                ViewBag.cart = cart;
+                ViewBag.total = cart.Sum(item => item.product.DefaultPrice * item.Quantity);
+                ViewBag.Quantity = cart.Sum(item => item.Quantity);
+            }
+            else
+            {
+                ViewBag.cart = null;
+                ViewBag.total = 0;
+                ViewBag.Quantity = 0;
+            }
             if (supplier != null)
             {
                 var SupplierNr = int.Parse(supplier);
