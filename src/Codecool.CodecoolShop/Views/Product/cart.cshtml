@@ -31,9 +31,32 @@
             <td>@item.product.Id</td>
             <td>@item.product.Name</td>
             <td><img src="img/@(item.product.Name).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
-            <td>@item.product.DefaultPrice</td>
-            <td>@item.Quantity</td>
-            <td>@(item.product.DefaultPrice * item.Quantity)</td>
+            <td id="prize">@item.product.DefaultPrice</td>
+            <td><label for="inputq">Quantity:</label>
+                <input  id="inputq" type="text" value="@item.Quantity"/>
+            </td>
+            <td id="subtotal">
+                <script>
+                    document.getElementById("inputq").addEventListener("change", (event) =>
+                    {
+                        var quantity = document.getElementById("inputq").value;
+                        var prize = document.getElementById("prize").innerText;
+                        console.log(quantity);
+                        console.log(prize);
+                        //var quantity = querySelector("#i").val();
+                        //var prize = querySelector("#prize").val();
+                        var intquant = parseInt(quantity);
+                        var intprize = parseInt(prize);
+                        var total = intprize * intquant;
+                        //var child = document.createElement('div');
+                        var stringtotal = total.toString();
+                        //child.innerHTML = stringtotal;
+                        document.getElementById("subtotal").innerText = stringtotal;
+                        console.log(total);
+                    })
+                </script>
+                @(item.product.DefaultPrice * item.Quantity)
+            </td>
         </tr>
     }
     <tr>

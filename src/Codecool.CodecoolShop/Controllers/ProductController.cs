@@ -119,7 +119,7 @@ namespace Codecool.CodecoolShop.Controllers
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
-            return RedirectToAction("Cart");
+            return RedirectToAction("Index");
         }
 
         [Route("cart")]
