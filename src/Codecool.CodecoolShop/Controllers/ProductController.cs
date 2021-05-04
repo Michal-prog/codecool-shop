@@ -132,6 +132,13 @@ namespace Codecool.CodecoolShop.Controllers
             return View("cart");
         }
 
+        public IActionResult Quantity(string q)
+        {
+            ViewBag.q = q;
+            return View("Index1");
+        }
+
+
         private int isExist(int id)
         {
             List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
