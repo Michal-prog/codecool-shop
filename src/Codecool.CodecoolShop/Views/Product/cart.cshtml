@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<LineItem>
+@{
     Layout = null;
 }
 
@@ -26,6 +27,8 @@
         </tr>
         @foreach (var item in ViewBag.cart)
         {
+            
+            
             <tr>
                 <td>@item.product.Id</td>
                 <td>@item.product.Name</td>
@@ -67,6 +70,7 @@
         </tr>
     </table>
     <button type="submit">Checkout</button>
+    
 </form>
 <a asp-controller="product" asp-action="index">Continue Shopping</a>
 </body>

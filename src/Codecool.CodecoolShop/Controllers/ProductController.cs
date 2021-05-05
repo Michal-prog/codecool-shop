@@ -132,9 +132,12 @@ namespace Codecool.CodecoolShop.Controllers
             return View("cart");
         }
 
-        public IActionResult Quantity(string q)
+        public IActionResult Quantity()
         {
-            ViewBag.q = q;
+            var stringValues = Request.Form;
+            ViewBag.q = stringValues["q"][1];
+
+
             return View("Index1");
         }
 
