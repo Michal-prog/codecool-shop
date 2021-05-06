@@ -29,7 +29,7 @@
         {
             
             
-            <tr>
+            <tr style="" name="@item.product.Name">
                 <td>@item.product.Id</td>
                 <td>@item.product.Name</td>
                 <td><img src="img/@(item.product.Name).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
@@ -56,6 +56,9 @@
                                 var stringtotal = total.toString();
                                 //child.innerHTML = stringtotal;
                                 var subtotal = document.getElementById("@item.product.Name").innerText = stringtotal;
+                                if (quantity === "0") {
+                                    document.getElementsByName("@item.product.Name")[0].style.display = "none";
+                                }
                             })
                     </script>
                     @(item.product.DefaultPrice * item.Quantity)

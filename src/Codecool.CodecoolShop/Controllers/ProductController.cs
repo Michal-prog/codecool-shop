@@ -134,11 +134,23 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Quantity()
         {
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             var stringValues = Request.Form;
-            ViewBag.q = stringValues["q"][1];
-
-
-            return View("Index1");
+            var count1 = cart.Count;
+            var count2 = stringValues["q"].Count;
+            List<LineItem> ClearedCart = new List<LineItem>();
+            for (int i = 0; i < count1; i++)
+            {
+                var intValues = Int16.Parse(stringValues["q"][i]);
+                cart[i].Quantity = intValues;
+                if (cart[i].Quantity != 0)
+                {
+                    ClearedCart.Add(cart[i]);
+                }
+            }
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", ClearedCart);
+            //ViewBag.q = cart;
+            return View("Index1", ClearedCart);
         }
 
 

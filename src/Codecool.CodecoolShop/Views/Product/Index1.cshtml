@@ -1,6 +1,11 @@
-﻿@*
+﻿@model List<LineItem> 
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-<div name="heja" >@ViewBag.q</div>
+
+@foreach (var item in Model)
+{
+    <div name="heja">@item.Quantity</div>
+}
