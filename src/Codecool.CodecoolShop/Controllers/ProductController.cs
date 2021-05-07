@@ -149,8 +149,9 @@ namespace Codecool.CodecoolShop.Controllers
                 }
             }
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", ClearedCart);
+            var Checkout = new Checkout();
             //ViewBag.q = cart;
-            return View("Index1", ClearedCart);
+            return View("Checkout", Checkout);
         }
 
 
@@ -169,6 +170,10 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+        public IActionResult Payment()
+        {
+            return View("Payment");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
