@@ -32,33 +32,33 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Add(Product item)
         {
-            item.Id = context.Products.Count() + 1;
-            context.Products.Add(item);
+            item.Id = context.Product.Count() + 1;
+            context.Product.Add(item);
         }
 
         public void Remove(int id)
         {
-            context.Products.Remove(this.Get(id));
+            context.Product.Remove(this.Get(id));
         }
 
         public Product Get(int id)
         {
-            return context.Products.Find(id);
+            return context.Product.Find(id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return context.Products.ToList();
+            return context.Product.ToList();
         }
 
         public IEnumerable<Product> GetBy(Supplier supplier)
         {
-            return context.Products.Where(x => x.Supplier.Id == supplier.Id);
+            return context.Product.Where(x => x.Supplier.Id == supplier.Id);
         }
 
         public IEnumerable<Product> GetBy(ProductCategory productCategory)
         {
-            return context.Products.Where(x => x.ProductCategory.Id == productCategory.Id);
+            return context.Product.Where(x => x.ProductCategory.Id == productCategory.Id);
         }
     }
 }

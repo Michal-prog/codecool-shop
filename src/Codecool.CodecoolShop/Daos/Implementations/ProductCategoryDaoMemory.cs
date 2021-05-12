@@ -30,8 +30,8 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Add(ProductCategory item)
         {
-            item.Id = context.Products.Count() + 1;
-            context.Category.Add(item);
+            item.Id = context.Product.Count() + 1;
+            context.ProductCategory.Add(item);
 
             //item.Id = data.Count + 1;
             //data.Add(item);
@@ -39,17 +39,17 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Remove(int id)
         {
-            context.Category.Remove(this.Get(id));
+            context.ProductCategory.Remove(this.Get(id));
         }
 
         public ProductCategory Get(int id)
         {
-            return context.Category.Find(id);
+            return context.ProductCategory.Find(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return context.Category.ToList();
+            return context.ProductCategory.ToList();
         }
     }
 }

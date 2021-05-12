@@ -26,6 +26,8 @@ namespace Codecool.CodecoolShop.Controllers
                 new ProductDaoMemory(context),
                 new ProductCategoryDaoMemory(context),
                 new SupplierDaoMemory(context));
+
+
         }
 
         
@@ -33,14 +35,15 @@ namespace Codecool.CodecoolShop.Controllers
         
         public IActionResult Index(int categoryNumber = 1)
         {
+            ProductService.AddProduct();
             var products = ProductService.GetProductsForCategory(categoryNumber);
-            
+
             //product category
-            var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
+            var list = ProductService.GetAllProductCategory().ToList<ProductCategory>();
             ViewData["ListCategory"] = list;
             
             // product suppliers
-            var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
+            var listOfSuppliers = ProductService.GetAllSuppliers().ToList<Supplier>();
             ViewData["listOfSuppliers"] = listOfSuppliers;
             if (SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart") != null)
             {
@@ -65,10 +68,10 @@ namespace Codecool.CodecoolShop.Controllers
             
             var CategoryNr = int.Parse(category);
             //product category
-            var list = ProductCategoryDaoMemory.GetInstance().GetAll().ToList();
+            var list = ProductService.GetAllProductCategory().ToList();
             ViewData["ListCategory"] = list;
             // product suppliers
-            var listOfSuppliers = SupplierDaoMemory.GetInstance().GetAll().ToList();
+            var listOfSuppliers = ProductService.GetAllSuppliers().ToList();
             ViewData["listOfSuppliers"] = listOfSuppliers;
             if (SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart") != null)
             {
@@ -92,7 +95,7 @@ namespace Codecool.CodecoolShop.Controllers
             else
             {
                 var products = ProductService.GetProductsForCategory(CategoryNr);
-                return View(products.ToList());
+                return View(products);
             }
             
         }

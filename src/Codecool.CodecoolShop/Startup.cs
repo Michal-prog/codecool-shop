@@ -61,10 +61,11 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            SetupInMemoryDatabases();
+            
+            /*SetupInMemoryDatabases();*/
         }
 
-        private void SetupInMemoryDatabases()
+ /*       private void SetupInMemoryDatabases()
         {
             IProductDao productDataStore = ProductDaoMemory.GetInstance();
             IProductCategoryDao productCategoryDataStore = ProductCategoryDaoMemory.GetInstance();
@@ -83,6 +84,7 @@ namespace Codecool.CodecoolShop
             productDataStore.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Amazon Fire1", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = phone, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 7001", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
-        }
+        }*/
+
     }
 }

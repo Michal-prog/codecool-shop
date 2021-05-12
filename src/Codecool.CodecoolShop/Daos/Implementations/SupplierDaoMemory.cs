@@ -30,23 +30,23 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Add(Supplier item)
         {
-            item.Id = context.Suppliers.Count() + 1;
-            context.Suppliers.Add(item);
+            item.Id = context.Supplier.Count() + 1;
+            context.Supplier.Add(item);
         }
 
         public void Remove(int id)
         {
-            context.Suppliers.Remove(this.Get(id));
+            context.Supplier.Remove(this.Get(id));
         }
 
         public Supplier Get(int id)
         {
-            return context.Suppliers.Find(id);
+            return context.Supplier.Find(id);
         }
 
         public IEnumerable<Supplier> GetAll()
         {
-            return context.Suppliers.ToList();
+            return context.Supplier.ToList();
         }
     }
 }
