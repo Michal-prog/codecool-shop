@@ -20,45 +20,45 @@ namespace Codecool.CodecoolShop.Daos.Implementations
             this.context = context;
         }
 
-        public static ProductDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductDaoMemory();
-            }
+        //public static ProductDaoMemory GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new ProductDaoMemory();
+        //    }
 
-            return instance;
-        }
+        //    return instance;
+        //}
 
         public void Add(Product item)
         {
-            item.Id = data.Count + 1;
-            data.Add(item);
+            item.Id = context.Products.Count() + 1;
+            context.Products.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            context.Products.Remove(this.Get(id));
         }
 
         public Product Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            return context.Products.Find(id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return data;
+            return context.Products.ToList();
         }
 
         public IEnumerable<Product> GetBy(Supplier supplier)
         {
-            return data.Where(x => x.Supplier.Id == supplier.Id);
+            return context.Products.Where(x => x.Supplier.Id == supplier.Id);
         }
 
         public IEnumerable<Product> GetBy(ProductCategory productCategory)
         {
-            return data.Where(x => x.ProductCategory.Id == productCategory.Id);
+            return context.Products.Where(x => x.ProductCategory.Id == productCategory.Id);
         }
     }
 }

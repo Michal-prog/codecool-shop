@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Models;
 
@@ -17,35 +18,35 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         {
             this.context = context;
         }
-        public static SupplierDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new SupplierDaoMemory();
-            }
+        //public static SupplierDaoMemory GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new SupplierDaoMemory();
+        //    }
 
-            return instance;
-        }
+        //    return instance;
+        //}
 
         public void Add(Supplier item)
         {
-            item.Id = data.Count + 1;
-            data.Add(item);
+            item.Id = context.Suppliers.Count() + 1;
+            context.Suppliers.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            context.Suppliers.Remove(this.Get(id));
         }
 
         public Supplier Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            return context.Suppliers.Find(id);
         }
 
         public IEnumerable<Supplier> GetAll()
         {
-            return data;
+            return context.Suppliers.ToList();
         }
     }
 }

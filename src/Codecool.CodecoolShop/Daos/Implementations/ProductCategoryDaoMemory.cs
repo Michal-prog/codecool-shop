@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Models;
@@ -29,28 +30,26 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Add(ProductCategory item)
         {
-            item.Id = context.Products.FirstOrDefault(x =>)
-            data.Add(item);
+            item.Id = context.Products.Count() + 1;
+            context.Category.Add(item);
+
+            //item.Id = data.Count + 1;
+            //data.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            context.Category.Remove(this.Get(id));
         }
 
         public ProductCategory Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            return context.Category.Find(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return data;
+            return context.Category.ToList();
         }
-        //public List<ProductCategory> GetAllList()
-        //{
-        //    return data;
-        //}
-
     }
 }
