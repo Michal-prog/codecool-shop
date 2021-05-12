@@ -1,30 +1,35 @@
 using System.Collections.Generic;
+using System.Linq;
+using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Models;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {
     class ProductCategoryDaoMemory : IProductCategoryDao
     {
-        private List<ProductCategory> data = new List<ProductCategory>();
-        private static ProductCategoryDaoMemory instance = null;
+        //private List<ProductCategory> data = new List<ProductCategory>();
+        //private static ProductCategoryDaoMemory instance = null;
+        private Context context { get; set;}
 
-        private ProductCategoryDaoMemory()
+        public ProductCategoryDaoMemory(Context context)
         {
+            this.context = context;
         }
 
-        public static ProductCategoryDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductCategoryDaoMemory();
-            }
+        //public static ProductCategoryDaoMemory GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new ProductCategoryDaoMemory();
+        //    }
 
-            return instance;
-        }
+        //    return instance;
+        //}
 
         public void Add(ProductCategory item)
         {
-            item.Id = data.Count + 1;
+            item.Id = context.Products.FirstOrDefault(x =>)
             data.Add(item);
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Models;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
@@ -8,10 +9,14 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         private List<Supplier> data = new List<Supplier>();
         private static SupplierDaoMemory instance = null;
 
-        private SupplierDaoMemory()
-        {
-        }
 
+        private Context context { get; set; }
+
+
+        public SupplierDaoMemory(Context context)
+        {
+            this.context = context;
+        }
         public static SupplierDaoMemory GetInstance()
         {
             if (instance == null)

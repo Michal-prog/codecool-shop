@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Models;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
@@ -11,8 +12,12 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         private List<Product> data = new List<Product>();
         private static ProductDaoMemory instance = null;
 
-        private ProductDaoMemory()
+        private Context context { get; set; }
+        
+
+        public ProductDaoMemory(Context context)
         {
+            this.context = context;
         }
 
         public static ProductDaoMemory GetInstance()

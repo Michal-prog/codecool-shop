@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Daos;
+using Codecool.CodecoolShop.Daos.Conte;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,13 +19,13 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }
 
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(ILogger<ProductController> logger, Context context)
         {
             _logger = logger;
             ProductService = new ProductService(
-                ProductDaoMemory.GetInstance(),
-                ProductCategoryDaoMemory.GetInstance(),
-                SupplierDaoMemory.GetInstance());
+                new ProductDaoMemory(context),
+                new ProductCategoryDaoMemory(context),
+                new SupplierDaoMemory(context));
         }
 
         
