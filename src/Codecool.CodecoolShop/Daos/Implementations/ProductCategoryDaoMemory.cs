@@ -30,7 +30,7 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Add(ProductCategory item)
         {
-            item.Id = context.Product.Count() + 1;
+            item.Id = context.Products.Count() + 1;
             context.ProductCategory.Add(item);
 
             //item.Id = data.Count + 1;

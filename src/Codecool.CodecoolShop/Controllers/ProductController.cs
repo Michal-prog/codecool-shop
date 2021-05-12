@@ -90,12 +90,14 @@ namespace Codecool.CodecoolShop.Controllers
             {
                 var SupplierNr = int.Parse(supplier);
                 var products = ProductService.GetProductsForSupplier(SupplierNr);
-                return View(products.ToList());
+                return View(products);
             }
             else
             {
                 var products = ProductService.GetProductsForCategory(CategoryNr);
-                return View(products);
+               /* List<Product> entitylist = new List<Product>(products);
+                var  nowalista = entitylist.ToList();*/
+                return View(products.ToList());
             }
             
         }

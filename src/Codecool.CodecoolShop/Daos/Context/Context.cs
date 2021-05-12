@@ -6,7 +6,7 @@ namespace Codecool.CodecoolShop.Daos.Conte
 {
     public class Context: DbContext
     {
-        public Microsoft.EntityFrameworkCore.DbSet<Product> Product { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<ProductCategory> ProductCategory { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Supplier> Supplier { get; set; }
         public Context(DbContextOptions<Context>opt) : base(opt)
