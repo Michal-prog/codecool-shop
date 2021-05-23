@@ -212,12 +212,19 @@ namespace Codecool.CodecoolShop.Controllers
             }
             return -1;
         }
+
+        
         public IActionResult Privacy()
         {
             return View();
         }
-        public IActionResult Payment()
+
+        [HttpPost]
+        public IActionResult Payment(Checkout checkout)
         {
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "checkout", checkout);
+            List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            ViewBag.total = cart.Sum(item => item.product.DefaultPrice * item.Quantity);
             return View("Payment");
         }
 
