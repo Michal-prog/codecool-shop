@@ -24,6 +24,11 @@ namespace Codecool.CodecoolShop.Services
             return this.productCategoryDao.Get(categoryId);
         }
 
+        public Supplier GetProductSupplier(int categoryId)
+        {
+            return this.supplierDao.Get(categoryId);
+        }
+
         public IEnumerable<Product> GetProductsForCategory(int categoryId)
         {
             ProductCategory category = this.productCategoryDao.Get(categoryId);
@@ -68,23 +73,10 @@ namespace Codecool.CodecoolShop.Services
                   return listOfSuppliers;
               }*/
 
-        public void AddProduct()
+        public void AddProduct(Product product)
         {
-        
+            productDao.Add(product);
 
-            Supplier amazon = new Supplier { Name = "Amazon", Description = "Digital content and services" };
-            supplierDao.Add(amazon);
-            Supplier lenovo = new Supplier { Name = "Lenovo", Description = "Computers" };
-            supplierDao.Add(lenovo);
-            ProductCategory tablet = new ProductCategory { Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
-            productCategoryDao.Add(tablet);
-            ProductCategory phone = new ProductCategory { Name = "Tablet", Department = "phone", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
-            productCategoryDao.Add(phone);
-            productDao.Add(new Product { Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
-            productDao.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
-            productDao.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
-            productDao.Add(new Product { Name = "Amazon Fire1", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = phone, Supplier = amazon });
-            productDao.Add(new Product { Name = "Lenovo IdeaPad Miix 7001", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
         }
 
     }

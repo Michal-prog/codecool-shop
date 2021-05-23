@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Codecool.CodecoolShop.Helpers;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -35,7 +37,7 @@ namespace Codecool.CodecoolShop.Controllers
         
         public IActionResult Index(int categoryNumber = 1)
         {
-            ProductService.AddProduct();
+            
             var products = ProductService.GetProductsForCategory(categoryNumber);
 
             //product category
@@ -100,6 +102,43 @@ namespace Codecool.CodecoolShop.Controllers
                 return View(products.ToList());
             }
             
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct([FromBody] string product)
+        {
+
+            var values = product;
+            var productjson = JsonConvert.DeserializeObject<Product>(product);
+
+
+          /*  product.Supplier = ProductService.GetProductSupplier(1);
+            product.ProductCategory = ProductService.GetProductCategory(1);
+
+            ProductService.AddProduct(product);*/
+
+
+            return Json(new { Status = "success" });
+            }
+
+        /*[HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            Console.WriteLine(product);
+            product.Supplier = ProductService.GetProductSupplier(1);
+            product.ProductCategory = ProductService.GetProductCategory(1);
+
+            *//*ProductService.AddProduct(product);*//*
+           
+            Console.WriteLine(product.Name);
+
+
+            return Json(product);
+        }*/
+
+        public IActionResult AddP()
+        {
+            return View("AddP");
         }
         
         public IActionResult Buy(int id)
